@@ -1,0 +1,42 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark py-1">
+    <img src="/images/AugmentXLogo.png" alt="" srcset="" width="50rem" class="mr-3">
+    <a class="navbar-brand" href="/posts">Med3D</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>  
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users">Profiles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/posts/new">Upload model</a>
+        </li>
+      </ul>
+      <% if(typeof navSearchDestination != 'undefined' ) { %>
+      <form class="form-inline my-2 my-lg-0" action="<%= navSearchDestination %>" method="GET">
+        <input id="searchbar_main" class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+      </form>
+      <% } %>
+      <form class="form-inline my-2 my-lg-0">
+        <% if(!currentUser) { %>
+          <a class="btn btn-outline-light my-2 mr-1 my-sm-0" href="/login">Login</a>
+          <a class="btn btn-outline-light my-2 mr-1 my-sm-0" href="/register">Register</a>
+        <% } else { %>
+          <a class="btn btn-outline-light my-2 mr-1 my-sm-0" href="/users/<%= currentUser._id %>"><%= currentUser.fullname %></a>
+          <a class="btn btn-outline-light my-2 mr-1 my-sm-0" href="/logout">Logout</a>
+        <% } %>
+      </form>
+    </div>
+  </nav>
+<% if(error && error.length > 0) { %>
+  <div class="alert alert-danger text-center" role="alert"><%= error %></div>
+<% } if(success && success.length > 0) { %>
+  <div class="alert alert-success text-center" role="alert"><%= success %></div>
+<% } if(primary && primary.length > 0) { %>
+<div class="alert alert-primary text-center" role="alert"><%= primary %></div>
+<% } %>
